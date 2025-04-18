@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 type Todo = {
@@ -18,17 +18,20 @@ const page2 = () => {
                 console.log(json)
                 setTodos(json)
             })
-    })
+    }, [])
+
     return (
         <View>
             <Text>page2</Text>
             <Text>todos</Text>
-            {todos.map((todo) => (
-                <View key={todo.id}>
-                    <Text>{todo.title}</Text>
-                    <Text>{todo.completed ? '完了' : '未完了'}</Text>
-                </View>
-            ))}
+            <ScrollView>
+                {todos.map((todo) => (
+                    <View key={todo.id}>
+                        <Text>{todo.title}</Text>
+                        <Text>{todo.completed ? '完了' : '未完了'}</Text>
+                    </View>
+                ))}
+            </ScrollView>
         </View>
     )
 }
