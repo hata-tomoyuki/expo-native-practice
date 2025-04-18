@@ -24,9 +24,8 @@ const page2 = () => {
     }, [])
 
     return (
-        <View>
-            <Text>page2</Text>
-            <Text>todos</Text>
+        <View style={styles.container}>
+            <Text style={styles.title}>todos</Text>
             {isLoadng && <Text>Loading...</Text>}
             {/* <ScrollView>
                 {todos.map((todo) => (
@@ -37,10 +36,11 @@ const page2 = () => {
                 ))}
             </ScrollView> */}
             <FlatList
+            style={styles.todoContainer}
                 data={todos}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View>
+                    <View style={styles.todo}>
                         <Text>{item.title}</Text>
                         <Text>{item.completed ? '完了' : '未完了'}</Text>
                     </View>
@@ -52,4 +52,24 @@ const page2 = () => {
 
 export default page2
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        padding: 20,
+    },
+    todoContainer: {
+        width: '90%',
+    },
+    todo: {
+        marginBottom: 10,
+        padding: 10,
+        backgroundColor: '#f9c2ff',
+        borderRadius: 5,
+    }
+})
