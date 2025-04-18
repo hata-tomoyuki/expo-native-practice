@@ -1,5 +1,6 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'expo-router'
 
 type Todo = {
     userId: number
@@ -10,7 +11,10 @@ type Todo = {
 
 const page2 = () => {
     const [todos, setTodos] = useState<Todo[]>([])
-    const [isLoadng, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
+
+    const router = useRouter()
+
 
     useEffect(() => {
         setIsLoading(true)
@@ -26,7 +30,7 @@ const page2 = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>todos</Text>
-            {isLoadng && <Text>Loading...</Text>}
+            {isLoading && <Text>Loading...</Text>}
             {/* <ScrollView>
                 {todos.map((todo) => (
                     <View key={todo.id}>
@@ -41,7 +45,9 @@ const page2 = () => {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.todo}>
+                        <TouchableOpacity onPress={() => router.push(`/page2/${item.id}`)}>
                         <Text>{item.title}</Text>
+                        </TouchableOpacity>
                         <Text>{item.completed ? '完了' : '未完了'}</Text>
                     </View>
                 )}
