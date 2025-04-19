@@ -11,7 +11,7 @@ type Todo = {
 
 
 export default function TodoDetail() {
-    const { id } = useLocalSearchParams()
+    const { userId, id, title, completed } = useLocalSearchParams()
     const [todo, setTodo] = useState<Todo>({
         userId: 0,
         id: 0,
@@ -20,21 +20,21 @@ export default function TodoDetail() {
     })
     const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        console.log('Todo ID:', id)
-        fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                setIsLoading(false)
-                setTodo(json)
-            })
-    }, [])
+    // useEffect(() => {
+    //     console.log('Todo ID:', id)
+    //     fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             console.log(json)
+    //             setIsLoading(false)
+    //             setTodo(json)
+    //         })
+    // }, [])
 
     return (
         <View style={{ padding: 20 }}>
             <Text style={{ fontSize: 24 }}>Todoの詳細ページ</Text>
-            {isLoading ? <Text>Loading...</Text> : (
+            {/* {isLoading ? <Text>Loading...</Text> : (
                 <View>
                     <Text>ID: {id}</Text>
                     <Text>タイトル: {todo.title}</Text>
@@ -42,7 +42,14 @@ export default function TodoDetail() {
                     <Text>ユーザーID: {todo.userId}</Text>
                     <Text>Todo ID: {todo.id}</Text>
                 </View>
-            )}
+            )} */}
+            <View>
+                <Text>ID: {id}</Text>
+                <Text>タイトル: {title}</Text>
+                <Text>完了: {completed ? '完了' : '未完了'}</Text>
+                <Text>ユーザーID: {userId}</Text>
+                <Text>Todo ID: {id}</Text>
+            </View>
         </View>
     )
 }

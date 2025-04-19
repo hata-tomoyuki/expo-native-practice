@@ -27,6 +27,18 @@ const page2 = () => {
             })
     }, [])
 
+    const handleTodoPress = (todo: Todo) => {
+        router.push({
+            pathname: '/page2/[id]',
+            params: {
+                userId: todo.userId.toString(),
+                id: todo.id.toString(),
+                title: todo.title,
+                completed: todo.completed.toString(),
+            },
+        })
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>todos</Text>
@@ -40,18 +52,18 @@ const page2 = () => {
                 ))}
             </ScrollView> */}
             <FlatList
-            style={styles.todoContainer}
+                style={styles.todoContainer}
                 data={todos}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.todo}>
-                        <TouchableOpacity onPress={() => router.push(`/page2/${item.id}`)}>
-                        <Text>{item.title}</Text>
+                        <TouchableOpacity onPress={() => handleTodoPress(item)}>
+                            <Text>{item.title}</Text>
                         </TouchableOpacity>
                         <Text>{item.completed ? '完了' : '未完了'}</Text>
                     </View>
                 )}
-                />
+            />
         </View>
     )
 }
