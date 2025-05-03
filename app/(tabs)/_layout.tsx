@@ -18,6 +18,12 @@ export default function TabLayout() {
           tabBarIcon: () => <FontAwesome size={28} name="cog" />,
         }}
       />
+      <Tabs.Screen
+        name="data/[id]"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
