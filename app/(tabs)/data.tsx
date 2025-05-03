@@ -43,7 +43,17 @@ const data = () => {
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View>
-                            <TouchableOpacity onPress={() => router.push(`/data/${item.id}`)}>
+                            <TouchableOpacity
+                                onPress={() => router.push({
+                                    pathname: '/data/[id]',
+                                    params: {
+                                        userId: item.userId.toString(),
+                                        id: item.id.toString(),
+                                        title: item.title,
+                                        completed: item.completed.toString(),
+                                    },
+                                })}
+                            >
                                 <Text>{item.title}</Text>
                             </TouchableOpacity>
 
