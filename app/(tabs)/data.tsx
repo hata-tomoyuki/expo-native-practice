@@ -1,5 +1,6 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'expo-router'
 
 type Todo = {
     userId: number
@@ -9,6 +10,8 @@ type Todo = {
 }
 
 const data = () => {
+
+    const router = useRouter()
 
     const [todos, setTodos] = useState<Todo[]>([])
     const [loading, setIsLoading] = useState(true)
@@ -40,7 +43,19 @@ const data = () => {
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View>
-                            <Text>{item.title}</Text>
+                            <TouchableOpacity
+                                onPress={() => router.push({
+                                    pathname: '/data/[id]',
+                                    params: {
+                                        userId: item.userId.toString(),
+                                        id: item.id.toString(),
+                                        title: item.title,
+                                        completed: item.completed.toString(),
+                                    }
+                                })}
+                            >
+                                <Text>{item.title}</Text>
+                            </TouchableOpacity>
                             <Text>{item.completed ? '完了' : '未完了'}</Text>
                         </View>
                     )}
