@@ -1,5 +1,6 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'expo-router'
 
 type Todo = {
     userId: number
@@ -12,6 +13,8 @@ const data = () => {
 
     const [todos, setTodos] = useState<Todo[]>([])
     const [loading, setIsLoading] = useState(true)
+
+    const router = useRouter()
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/todos')
@@ -40,7 +43,10 @@ const data = () => {
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View>
-                            <Text>{item.title}</Text>
+                            <TouchableOpacity onPress={() => router.push(`/data/${item.id}`)}>
+                                <Text>{item.title}</Text>
+                            </TouchableOpacity>
+
                             <Text>{item.completed ? '完了' : '未完了'}</Text>
                         </View>
                     )}
