@@ -3,13 +3,14 @@ import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
 
 const DataDetailPage = () => {
-    const { params } = useLocalSearchParams()
-    console.log(params)
-  return (
-    <View>
-      <Text>DataDetailPage</Text>
-    </View>
-  )
+    const { userId, id, title, completed } = useLocalSearchParams()
+
+    return (
+        <View>
+            <Text>{title}</Text>
+            <Text>{completed ? '完了' : '未完了'}</Text>
+        </View>
+    )
 }
 
 export default DataDetailPage
